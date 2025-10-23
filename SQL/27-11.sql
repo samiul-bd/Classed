@@ -1,0 +1,1 @@
+EXEC spStateWiseVendors 'TN'

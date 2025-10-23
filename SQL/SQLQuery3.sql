@@ -1,0 +1,19 @@
+--USE MASTER
+--GO
+--CREATE DATABASE Drop1DB
+USE Drop1DB
+GO
+CREATE TABLE DropTable(
+DropId int NOT NULL PRIMARY KEY IDENTITY (100,5),
+Title VARCHAR (10) NOT NULL
+)
+GO
+INSERT INTO DropTable (Title)
+VALUES 
+('Hellow'),
+('World')
+
+
+USE Drop1DB
+Go
+DROP TABLE DropTable

@@ -1,0 +1,69 @@
+LIbarayDB
+
+BOOKT
+BookID  int Primarykey not null,
+BookTitle varchar (25) not null
+AuthorID int not null REFERENCE Author (AuthorID)
+Author 
+AuthorID int Primarykey not null,
+FirstName VARCHAR (15) not null,
+LastName VARCHAR (15) not null
+
+Parton
+
+PartonID int Primarykey not null,
+FirstName VARCHAR (15) not null,
+LastName VARCHAR (15) not null
+
+BookTransaction  
+TransactionID VARCHAR () primary key not null 
+ PartonID int not null REFERENCEs Parton(PartonID),
+BookID  int  not null REFERENCEs Book (BookID),
+
+
+...................
+
+
+
+CustomerDb............DATABASE
+
+CoustomerType.......(Table)
+TypeID int primary key not null
+TypeName varchar (12)
+
+Customer 
+
+CustomerID int not null
+FirstName varchar (10) not null
+LastName varchar (10) not null
+TypeID int not null References CustomerType (TypeID)
+CustPhone varchar  (5) not null
+ShippingAddress varchar (15)not null
+City varchar (10)not null
+State vrachar (10)not null
+
+Artist 
+ArtistID char (2)  primary key not null
+firstName varchar (10) not null
+LastName Varchar (10) not null
+
+Art 
+
+ArtID int  primary key not null
+Artitle varchar (30) not null
+ArtistID char (2) not null references Artist (ArtistID)
+
+Invoices (masterTable)
+
+InvoiceID int primary key not null
+InvoiceTotal money not null
+CustomerID int not null REFERENCES customer (CustomerID)
+
+InvoiceLineItem  ..............(detailTable)
+LineItemID int primary key not null,
+InvoiceID int not null REFERENCES Invoice (InvoiceID)
+ArtID int not null References Art (ArtID)
+UnitPrice money not null,
+Discount float not null
+
+

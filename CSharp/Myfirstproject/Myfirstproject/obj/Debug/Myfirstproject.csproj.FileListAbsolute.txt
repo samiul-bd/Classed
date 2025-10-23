@@ -1,0 +1,7 @@
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\bin\Debug\Myfirstproject.exe.config
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\bin\Debug\Myfirstproject.exe
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\bin\Debug\Myfirstproject.pdb
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\obj\Debug\Myfirstproject.csproj.AssemblyReference.cache
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\obj\Debug\Myfirstproject.csproj.CoreCompileInputs.cache
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\obj\Debug\Myfirstproject.exe
+E:\Jannat\CSharp\Myfirstproject\Myfirstproject\obj\Debug\Myfirstproject.pdb

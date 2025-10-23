@@ -1,0 +1,22 @@
+USE [TestDBGui]
+GO
+
+/****** Object:  Table [dbo].[Test]    Script Date: 10/18/2025 9:30:29 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Test](
+	[TestID] [int] NOT NULL,
+	[TestDescription] [varchar](20) NOT NULL,
+	[Charge] [money] NULL,
+ CONSTRAINT [PK_Test] PRIMARY KEY CLUSTERED 
+(
+	[TestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

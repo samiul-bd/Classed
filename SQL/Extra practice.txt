@@ -1,0 +1,21 @@
+  Extra practice 
+
+USE Examples
+GO
+
+
+
+SELECT * FROM NullSample
+--WHERE InvoiceTotal<>0
+WHERE InvoiceTotal IS NOT NULL
+
+
+USE AP
+GO
+
+--SELECT * FROM Vendors WHERE VendorState LIKE 'N[^K-Y]%'
+
+SELECT VendorID, VendorName,VendorCity, VendorState FROM Vendors 
+ORDER BY VendorID
+OFFSET 10 ROWS FETCH Next 20 ROWS ONLY 
+

@@ -1,0 +1,18 @@
+DEPARTMENT 
+DeptID-pk
+Doctor 
+DoctorID-pk
+FName
+LName
+DeptID-pk
+Patient 
+PatientID -pk
+FName
+LName
+Appointment
+AppointmentID-pk
+AppointmentDate
+DoctorID-fk
+PateintID -fk
+Doctor's FEES  
+TreatmentCost  

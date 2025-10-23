@@ -1,0 +1,13 @@
+Qus no 2
+
+
+USE AP
+GO
+
+
+--SELECT * FROM Invoices
+SELECT InvoiceNumber, InvoiceDate, InvoiceTotal,SUM( PaymentTotal+CreditTotal) AS Total
+FROM Invoices
+WHERE InvoiceDate> '2020-01-01' OR InvoiceTotal>500
+GROUP BY InvoiceNumber,InvoiceDate, InvoiceTotal
+HAVING InvoiceTotal> SUM (PaymentTotal + CreditTotal)

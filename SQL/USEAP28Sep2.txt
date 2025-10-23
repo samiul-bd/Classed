@@ -1,0 +1,46 @@
+qus 4
+
+USE AP
+GO
+
+SELECT InvoiceID, InvoiceNumber,InvoiceDate,InvoiceTotal,PaymentTotal,CreditTotal FROM Invoices WHERE InvoiceDate BETWEEN '2020-01-01' AND '2020-01-30'
+
+
+
+qus 5 
+
+USE AP
+GO
+
+SELECT * FROM Vendors WHERE VendorCity LIKE 'SAN%'
+
+qus 6 
+USE AP
+GO
+
+SELECT * FROM Vendors WHERE VendorContactFName LIKE '[A, E,I,O,U]%'
+ 
+qus 7 
+USE AP
+GO
+
+SELECT * FROM Vendors WHERE VendorState LIKE 'N[A-J]%'
+
+qus 8 
+
+USE AP
+GO
+
+SELECT * FROM Vendors WHERE VendorState LIKE 'N[^K-Y]%'
+
+qus 9
+
+USE AP
+GO
+
+
+SELECT VendorID, VendorName,VendorCity, VendorState FROM Vendors 
+ORDER BY VendorID
+OFFSET 10 ROWS FETCH Next 20 ROWS ONLY 
+
+

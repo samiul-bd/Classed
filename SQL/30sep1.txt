@@ -1,0 +1,291 @@
+USE AP
+GO
+--......qus no 2
+
+SELECT InvoiceNumber,InvoiceDate,InvoiceTotal,PaymentTotal,CreditTotal FROM Invoices 
+WHERE InvoiceDate >'2020-01-01' 
+AND InvoiceTotal>( PaymentTotal+CreditTotal) 
+OR InvoiceTotal>500
+
+--......qus no 15
+
+--SELECT DISTINCT VendorID FROM Invoices .....subqury
+
+SELECT VendorName,VendorCity, VendorState FROM Vendors
+WHERE VendorID IN (SELECT DISTINCT VendorID FROM Invoices )
+ORDER BY VendorName
+
+--qus no 10
+
+
+SELECT VendorID, COUNT(InvoiceID) AS NumberOfInvoices,
+AVG (InvoiceTotal) AS AvgAmount FROM Invoices
+GROUP BY VendorID
+HAVING AVG (InvoiceTotal) >2000
+ORDER BY AVG (InvoiceTotal) DESC
+
+
+
+qus no 25
+
+SELECT * FROM Invoices
+
+SELECT InvoiceNumber,TermsID FROM Invoices
+
+SELECT InvoiceNumber,TermsID,
+CASE TermsID
+WHEN 1 THEN '10 DAYS'
+
+FROM Invoices
+
+FROM Invoices
+CASE WHEN THEN END AS
+
+
+SELECT InvoiceNumber,TermsID,
+CASE TermsID
+WHEN 1 THEN '10 DAYS'
+WHEN 2 THEN '20 DAYS'
+WHEN 3 THEN '30 DAYS'
+WHEN 4 THEN '40 DAYS'
+WHEN 5 THEN '50 DAYS'
+END
+FROM Invoices
+
+SELECT InvoiceNumber,TermsID,
+CASE TermsID
+WHEN 1 THEN '10 DAYS'
+WHEN 2 THEN '20 DAYS'
+WHEN 3 THEN '30 DAYS'
+WHEN 4 THEN '40 DAYS'
+WHEN 5 THEN '50 DAYS'
+END
+AS Term
+FROM Invoices
+
+SELECT InvoiceNumber,TermsID,
+CASE TermsID
+WHEN 1 THEN '10 DAYS'
+WHEN 2 THEN '20 DAYS'
+WHEN 3 THEN '30 DAYS'
+WHEN 4 THEN '40 DAYS'
+WHEN 5 THEN '50 DAYS'
+END
+AS Term
+FROM Invoices
+ORDER BY TermsID
+
+
+--qus no 26
+
+-----IIF----
+
+SELECT * FROM Invoices
+
+SELECT VendorID, InvoiceTotal FROM Invoices
+
+SELECT VendorID, SUM (InvoiceTotal) AS Amount,
+IIF( SUM (InvoiceTotal)>5000,'High','Low') AS InvStatus
+FROM Invoices
+GROUP BY VendorID
+
+SELECT VendorID, SUM (InvoiceTotal) AS Amount,
+IIF( SUM (InvoiceTotal)>5000,'High','Low') AS InvStatus
+FROM Invoices
+GROUP BY VendorID
+ORDER BY  SUM (InvoiceTotal) DESC
+
+------CHOOSE------
+SELECT * FROM Invoices
+
+SELECT InvoiceNumber, InvoiceTotal,TermsID, 
+CHOOSE (TermsID,'10 Days','20 DAYS','30 DAYS','40 DAYS','50 DAYS') AS NetDues
+FROM Invoices
+
+
+
+
+--qus no 27
+
+--.....ISNULL...
+
+SELECT * FROM Invoices
+
+SELECT InvoiceNumber,PaymentDate,
+ISNULL (PaymentDate,'1900-01-01' ) AS PayDate
+FROM Invoices
+
+--.........COALESCE...........
+
+SELECT * FROM Invoices
+
+SELECT VendorID,InvoiceTotal
+FROM Invoices i JOIN Vendors v ON i.VendorID=v.VendorID
+
+SELECT v.VendorName, InvoiceTotal
+FROM Invoices i RIGHT JOIN Vendors v ON i.VendorID=v.VendorID
+
+SELECT v.VendorName, InvoiceTotal,
+COALESCE ( CAST (i.InvoiceTotal AS VARCHAR),'NO Invoice') AS VenInv
+FROM Invoices i RIGHT JOIN Vendors v ON i.VendorID=v.VendorID
+
+--qus no 21
+
+--..........CTE........
+
+SELECT * FROM Invoices
+
+
+SELECT VendorID, SUM (InvoiceTotal)AS SumAmount
+FROM Invoices  AS i JOIN Vendors v ON I.VendorID=v.VendorID
+
+SELECT v.VendorName,v.VendorState , SUM (InvoiceTotal)AS SumAmount
+FROM Invoices  AS i JOIN Vendors v ON I.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState
+
+WITH  Summary AS 
+(SELECT v.VendorName,v.VendorState , SUM (InvoiceTotal)AS SumAmount
+FROM Invoices  AS i JOIN Vendors v ON I.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+
+WITH Summary AS 
+(SELECT v.VendorName, v.VendorState, SUM (i.InvoiceTotal) AS SumAmount
+FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+TopAmount AS 
+(SELECT * FROM Summary )
+
+WITH Summary AS 
+(SELECT v.VendorName, v.VendorState, SUM (i.InvoiceTotal) AS SumAmount
+FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+TopAmount AS 
+(SELECT VendorState, MAX (SumAmount) AS MaxAmount FROM Summary GROUP BY VendorState)
+
+WITH Summary AS 
+(SELECT v.VendorName, v.VendorState, SUM (i.InvoiceTotal) AS SumAmount
+FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+TopAmount AS 
+(SELECT VendorState, MAX (SumAmount) AS MaxAmount FROM Summary GROUP BY VendorState)
+SELECT * FROM Summary
+
+WITH Summary AS 
+(SELECT v.VendorName, v.VendorState, SUM (i.InvoiceTotal) AS SumAmount
+FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+TopAmount AS 
+(SELECT VendorState, MAX (SumAmount) AS MaxAmount FROM Summary GROUP BY VendorState)
+SELECT * FROM Summary AS s JOIN TopAmount AS t ON S.VendorState=t.VendorState
+
+
+WITH Summary AS 
+(SELECT v.VendorName, v.VendorState, SUM (i.InvoiceTotal) AS SumAmount
+FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+GROUP BY v.VendorName, v.VendorState),
+TopAmount AS 
+(SELECT VendorState, MAX (SumAmount) AS MaxAmount FROM Summary GROUP BY VendorState)
+
+SELECT s.VendorName,s.VendorState,s.SumAmount,t.MaxAmount
+FROM Summary AS s JOIN TopAmount AS t ON S.VendorState=t.VendorState
+
+--qus no 13
+
+SELECT * FROM Invoices
+
+SELECT VendorID,TermsID, SUM(InvoiceTotal) AS SumAmount FROM Invoices
+GROUP BY GROUPING SETS (  (VendorID,TermsID),(TermsID),(VendorID),()
+)
+ORDER BY VendorID,TermsID
+
+--qus no 14
+
+SELECT * FROM Invoices
+
+SELECT InvoiceNumber,InvoiceDate, SUM (InvoiceTotal) AS SumAmount FROM Invoices
+
+SELECT InvoiceNumber,InvoiceID, SUM (InvoiceTotal)OVER ( Partition BY VendorID) AS VendorTotal
+
+FROM Invoices
+
+--qus no 19
+
+
+SELECT DISTINCT VendorID FROM Invoices
+
+SELECT VendorName,VendorCity,VendorState
+FROM Vendors WHERE VendorID IN ()
+
+SELECT VendorName,VendorCity,VendorState
+FROM Vendors WHERE VendorID IN (SELECT DISTINCT VendorID FROM Invoices)
+
+qus no 14
+
+SELECT MAX (InvoiceDate) FROM Invoices WHERE Invoices.VendorID=Vendors.VendorID
+
+
+
+SELECT DISTINCT VendorID, VendorName FROM Vendors
+
+SELECT VendorName,VendorCity,VendorState
+FROM Vendors WHERE VendorID IN (SELECT DISTINCT VendorID FROM Invoices)
+
+
+SELECT DISTINCT VendorID, VendorName, ( SELECT MAX (InvoiceDate) FROM Invoices WHERE Invoices.VendorID=Vendors.VendorID
+)  AS LatestInvDate FROM Vendors
+ORDER BY LatestInvDate  DESC
+
+-qus no 20
+
+
+SELECT * FROM Invoices WHERE Invoices.VendorID=Vendors.VendorID
+
+SELECT VendorName FROM Vendors
+WHERE NOT EXISTS (
+
+
+
+SELECT VendorName FROM Vendors
+WHERE NOT EXISTS (SELECT * FROM Invoices WHERE Invoices.VendorID=Vendors.VendorID)
+
+
+--EXTRA EXERCISE 
+SELECT * FROM Invoices
+
+SELECT VendorID, TermsID,SUM (InvoiceTotal) AS SumAmount FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+
+SELECT COUNT(*) AS InvCount FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+
+SELECT  v.VendorState, v.VendorCity,v.VendorName, COUNT(*) AS InvCount FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+
+SELECT  v.VendorState, v.VendorCity,v.VendorName, COUNT(*) AS InvCount FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+ GROUP BY v.VendorState,v.VendorCity
+
+SELECT  v.VendorState, v.VendorCity,v.VendorName, COUNT(*) AS InvCount FROM Invoices AS i JOIN Vendors AS v ON i.VendorID=v.VendorID
+ GROUP BY v.VendorState,v.VendorCity
+ Having COUNT (*) >=2 
+
+ --................qus no 28.....GROUPING 
+
+ SELECT * FROM Vendors
+
+SELECT VendorState,VendorCity, COUNT (*) AS QtyVendor
+ FROM Vendors
+ GROUP BY GROUPPING SETS ((VendorState,VendorCity), VendorZipCode,())
+ ORDER BY VendorState DESC, VendorCity DESC
+
+ --.................
+
+ SELECT AVG (InvoiceTotal) FROM Invoices
+
+ SELECT * FROM Invoices
+
+ SELECT InvoiceNumber, InvoiceDate, InvoiceTotal
+ FROM Invoices WHERE InvoiceTotal >(SELECT AVG (InvoiceTotal) FROM Invoices)
+
+.................
+
+ select * from Vendors
+
+ select InvoiceNumber,InvoiceTotal from Invoices
+

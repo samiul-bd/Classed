@@ -1,0 +1,7 @@
+InventoryBD
+Item->ItemID int (pk),ItemNo varchar (7)
+ItemType->ItemTypeID in pk, TypeName varchar (15)
+Color- >ClourID int pk, colorName varchar (5)
+ItemColor-> (ItemID,ColorID) Composite Primary Key
+Unit-> UnitID int pk, UnitName varchar (5)
+Lot-> LotNo varchar (5), ItemID,Quantity int, UnitID, UnitPrice 

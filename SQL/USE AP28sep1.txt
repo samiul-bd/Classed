@@ -1,0 +1,190 @@
+USE AP
+GO
+
+SELECT InvoiceNumber,InvoiceDate,InvoiceTotal, PaymentTotal,CreditTotal 
+FROM Invoices
+--WHERE InvoiceTotal>5000
+WHERE InvoiceDate>='2019-11-28' AND InvoiceDate <='2020-01-24'
+
+
+ORDER BY InvoiceTotal DESC
+
+
+USE AP
+GO
+
+
+SELECT InvoiceNumber,InvoiceDate,InvoiceTotal, PaymentTotal,CreditTotal 
+FROM Invoices
+WHERE InvoiceDate BETWEEN '2019-11-28' AND'2020-01-24'
+ORDER BY InvoiceTotal DESC
+
+USE AP
+GO
+
+SELECT InvoiceNumber,InvoiceTotal,(PaymentTotal + CreditTotal ) AS PaidAmount,
+(InvoiceTotal-PaymentTotal - CreditTotal) AS Due
+FROM Invoices
+WHERE InvoiceTotal-PaymentTotal - CreditTotal>0 AND InvoiceID=102
+ORDER BY InvoiceTotal DESC
+
+USE AP
+GO
+
+SELECT VendorName, VendorContactFName+''+VendorContactLName AS ContactFullName
+From Vendors
+
+USE AP
+GO
+
+
+
+
+SELECT DISTINCT (  VendorID ) FROM Invoices
+
+SELECT VendorName, VendorContactFName+''+VendorContactLName AS ContactFullName
+From Vendors 
+
+USE AP
+Go
+SELECT DISTINCT ( VendorID) FROM Invoices
+SELECT VendorName, (VendorContactFName+' '+VendorContactLName) AS ContactFullName
+From Vendors 
+
+
+
+
+USE AP
+Go
+
+SELECT VendorName, (VendorContactFName+' '+VendorContactLName) AS ContactFullName
+From Vendors 
+WHERE VendorID IN (SELECT DISTINCT ( VendorID) FROM Invoices)
+
+USE AP
+GO
+
+SELECT InvoiceNumber AS [Invoice Number], InvoiceDate AS [Date], InvoiceTotal AS [ Total] FROM Invoices
+
+SELECT [Invoice Number] =InvoiceNumber, [Date]=InvoiceDate  FROM Invoices
+
+USE AP
+GO
+
+SELECT InvoiceNumber AS [Invoice Number], InvoiceDate AS [Date], InvoiceTotal AS [ Total] FROM Invoices
+
+SELECT InvoiceNumber AS "Invoice Number", InvoiceDate AS "Date", InvoiceTotal AS " Total" FROM Invoices
+
+SELECT [Invoice Number] =InvoiceNumber, [Date]=InvoiceDate  FROM Invoices
+
+
+USE AP
+GO
+
+SELECT InvoiceDate, GETDATE() AS Today, DATEDIFF(year,InvoiceDate, GETDATE()) AS Duration 
+
+FROM Invoices
+
+USE AP
+GO
+
+SELECT InvoiceDate, GETDATE() AS Today, DATEDIFF(Day,InvoiceDate, GETDATE()) AS Duration 
+
+FROM Invoices
+
+
+
+
+SELECT InvoiceDate, GETDATE() AS Today, DATEDIFF(Day,InvoiceDate, GETDATE()) AS Duration 
+
+FROM Invoices
+
+SELECT  VendorCity,VendorState FROM Vendors
+
+
+USE AP
+GO
+
+SELECT InvoiceDate, GETDATE() AS Today, DATEDIFF(Day,InvoiceDate, GETDATE()) AS Duration 
+
+FROM Invoices
+
+SELECT  DISTINCT VendorCity,VendorState FROM Vendors
+
+USE AP
+GO
+
+SELECT VendorID, InvoiceTotal FROM Invoices
+ORDER BY InvoiceTotal DESC
+
+USE AP
+GO
+
+SELECT TOP 5 VendorID, InvoiceTotal FROM Invoices
+ORDER BY InvoiceTotal DESC
+
+USE AP
+GO
+
+SELECT TOP 5 PERCENT  VendorID, InvoiceTotal FROM Invoices
+ORDER BY InvoiceTotal DESC
+
+
+
+USE AP
+GO
+
+--SELECT TOP 5 PERCENT  VendorID, InvoiceTotal FROM Invoices
+--ORDER BY InvoiceTotal DESC
+
+SELECT Top 5 With Ties InvoiceID,  VendorID, InvoiceDate FROM Invoices
+ORDER BY InvoiceDate DESC 
+
+UPDATE Invoices SET InvoiceDate= '2020-01-30' WHERE InvoiceID=110
+
+qus 1
+
+USE AP
+GO
+
+SELECT Top 5 InvoiceID, InvoiceNumber,InvoiceTotal, PaymentTotal, CreditTotal FROM Invoices
+WHERE InvoiceTotal=( PaymentTotal + CreditTotal)
+ORDER BY InvoiceTotal DESC 
+
+QUS 3
+
+USE AP
+GO
+
+SELECT * FROM Vendors WHERE VendorState IN ( 'CA', 'NV','OR')
+
+
+SELECT InvoiceID, InvoiceNumber,InvoiceTotal, PaymentTotal, CreditTotal 
+FROM Invoices  
+JOIN
+
+WHERE InvoiceDate>'2020-01-01'
+
+USE AP
+GO
+
+SELECT VendorID FROM Vendors WHERE VendorState IN ( 'CA', 'NV','OR')
+
+
+SELECT InvoiceID, InvoiceNumber,InvoiceTotal, PaymentTotal, CreditTotal 
+FROM Invoices  
+
+WHERE  VendorID NOT In ( ) InvoiceDate>'2020-01-01'
+
+USE AP
+GO
+
+SELECT VendorID FROM Vendors WHERE VendorState IN ( 'CA', 'NV','OR')
+
+
+SELECT InvoiceID, InvoiceNumber,InvoiceTotal, PaymentTotal, CreditTotal 
+FROM Invoices  
+
+WHERE  VendorID NOT In (SELECT VendorID FROM Vendors 
+WHERE VendorState IN ( 'CA', 'NV','OR')) AND  InvoiceDate >'2020-01-01'
+
