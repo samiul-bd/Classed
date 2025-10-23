@@ -1,0 +1,25 @@
+	project:
+ProjectCode	PK
+Title
+EmployeeId(mnger)
+
+	Designation:
+DesignationId	PK
+Title
+
+	Department:
+DeptId		PK
+DepartmentName
+
+	Employee
+EmployeeId	PK
+FirstName
+LastName
+DesignationID	FK
+DeptId		FK
+
+	ProjectAssignment
+AssignmentID
+ProjectCode	FK
+EmployeeId	FK
+WorkHour

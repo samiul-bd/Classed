@@ -1,0 +1,29 @@
+tables. 
+Department
+DepartmentID int primary key Not Null,
+DepartmentName varchar(20) Not Null,
+
+
+Doctor
+DoctorId int primary key NOT NUll,
+DepartmentID int FK
+FirstName
+LastName
+
+patient
+patientID int pk
+FirstName
+LastName
+
+Appoinments
+AppoinmentID Int PK
+PatientID fk
+DoctorID fk
+AppoinmentDate datetime
+TreatmentCost money 
+
+
+
+
+
+ 

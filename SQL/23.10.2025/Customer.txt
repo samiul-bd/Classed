@@ -1,0 +1,26 @@
+	Customer
+CustID
+FirstName
+LastName
+ShippingAddress
+	
+	Offer
+OfferId
+Title
+	Product
+ProductID
+ProductName
+Supplier	FK
+
+	Terms
+TermsID
+TermsDescription
+
+	Sale
+SaleID
+custId		FK
+ProductID	FK
+TermsID		FK
+Quantity
+UnitPrice
+OfferID

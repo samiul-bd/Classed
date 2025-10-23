@@ -1,0 +1,42 @@
+Customers
+Id 		pk
+Name varchar(50)
+
+Region
+Id 		pk 
+Title
+
+
+SalesPerson
+ID 		pk
+Name
+RegionId 	FK
+
+
+Products
+ProductId int 	PK identity
+
+
+
+
+Orders
+OrderId Int	PK
+CustomerId 	FK
+ProductId int 	FK
+SPId 		FK
+Quantity int
+UnitPrice Money
+TotalPrice money
+
+
+
+
+
+
+
+
+
+
+
+
+

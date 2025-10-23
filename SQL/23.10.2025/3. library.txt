@@ -1,0 +1,8 @@
+3. library
+
+
+Member: MemberID, FirstName,LastName
+Author: AuthorID,FirstName,LastName
+Genre: GenreID,Title
+Book: BookID,BookName,AuthorID (Fk),GenreID (Fk)
+LibTransaction : CheckOutID, MemberID, BookID, IssueDate, DueDate, ReturnDate, Comments
